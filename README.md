@@ -25,6 +25,8 @@
 
 	* 在客户端中添加你的服务器设置，加密方法使用 `aes-256-cfb`。![客户端配置范例](https://user-images.githubusercontent.com/1270145/46902739-e68ed180-cefc-11e8-989b-a2fef96da92b.png)
 
+4. 大功告成
+
 ## macOS
 
 如果你经常需要改变 shadowsocks 的 server_port（默认为 8388），那么可以在你的 macOS 上运行下面这条命令（这一条命令有点长），它可以帮你自动修改 docker-compose 和 ShadowsocksX-NG 中的 server_port 并重启服务和客户端。
