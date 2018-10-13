@@ -55,6 +55,8 @@ open /Applications/ShadowsocksX-NG.app
 EOT
 ```
 
+**提示：使用终端的 bck-i-search 功能（`ctrl + r`）可以搜索你之前运行过的命令**
+
 ## License
 
 wtfpl
