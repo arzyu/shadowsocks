@@ -3,7 +3,7 @@ services:
   shadowsocks:
     image: easypi/shadowsocks-libev
     ports:
-      - "9191:8388"
+      - "8388:8388"
     environment:
       - PASSWORD=1234567890
     restart: always
