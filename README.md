@@ -13,9 +13,12 @@
 	```bash
 	git clone https://github.com/arzyu/shadowsocks
 	cd shadowsocks
+
+	## 修改 docker-compose.yml 中的密码（shadowsocks 客户端中使用）
+	## 然后后台运行 docker-compose
 	docker-compose up -d
 
-	## 将此 docker-compose 添加到系统服务以跟随 linux 服务器自启动
+	## 将此 docker-compose 添加到系统服务（systemd）以跟随 linux 服务器自启动
 	./setup.sh
 	```
 
