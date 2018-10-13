@@ -32,7 +32,7 @@
 
 ## macOS
 
-如果经常需要改变 shadowsocks 的 server_port（默认为 8388），那么可以在 macOS 上运行下面这条命令（这一条命令有点长），它可以帮你自动修改 docker-compose 和 ShadowsocksX-NG 中的 server_port 并重启服务和客户端。
+如果经常需要改变 shadowsocks 的 server_port（默认为 8388），那么可以在 macOS 上运行下面这条命令，它可以帮你自动修改 docker-compose 和 ShadowsocksX-NG 中的 server_port 并重启服务和客户端。
 
 **注意：命令中有 3 处需要根据自己的情况做修改**
 
@@ -58,7 +58,7 @@ open /Applications/ShadowsocksX-NG.app
 EOT
 ```
 
-**提示：使用终端的 bck-i-search 功能（`ctrl + r`）可以搜索你之前运行过的命令**
+**提示：这条命令很长，首次使用后，下次可以借助终端的 bck-i-search 功能（`ctrl + r`）搜索到它，修改端口再次运行**
 
 ## License
 
