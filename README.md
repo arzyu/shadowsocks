@@ -10,7 +10,7 @@
 
 	## 安装 docker-compose
 	curl -fsSL https://github.com/docker/compose/releases/latest | \
-	    sed -nE "/<code>curl/N;/chmod/s/^.+<code>//p" | sh
+	    sed -nE "/<code>curl/N;/chmod/s/^.*<code>//p" | sh
 	```
 
 2. 在 linux 服务器上运行服务
