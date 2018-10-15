@@ -50,7 +50,7 @@ port=8383 && { ssh USER@DOMAIN bash << EOT
 ## change docker-compose server_port
 cd /PATH/TO/SHADOWSOCKS
 docker-compose down
-sed -i -E "N;s/(ports:[^0-9]*)[0-9]+:/\1$port:/" docker-compose.yml
+sed -i -E "/ports:/N;s/([^0-9]*)[0-9]+:/\1$port:/" docker-compose.yml
 docker-compose up -d
 EOT
 } && bash << EOT
