@@ -6,7 +6,7 @@
 
 	```bash
 	## 使用官方脚本安装 docker
-	curl -fsSL get.docker.com -o - | sh
+	curl -fsSL get.docker.com | sh
 
 	## 安装 docker-compose
 	curl -fsSL https://github.com/docker/compose/releases/latest | \
