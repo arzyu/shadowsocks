@@ -2,11 +2,16 @@
 
 ## 安装
 
-1. 在 linux 服务器上安装 docker, docker-compose
+1. 在 linux 服务器上安装 docker 环境
 
-	* 在 [安装 docker 页面](https://docs.docker.com/install/#supported-platforms) 选择对应的 linux 发行版，按照文档进行安装
+	```bash
+	## 使用官方脚本安装 docker
+	curl -fsSL get.docker.com -o - | sh
 
-	* 在 [docker-compose 的 Release 页面](https://github.com/docker/compose/releases/latest) 复制最新版本的安装命令运行安装
+	## 安装 docker-compose
+	curl -fsSL https://github.com/docker/compose/releases/latest | \
+	    sed -nE "/<code>curl/N;/chmod/s/^.+<code>//p" | sh
+	```
 
 2. 在 linux 服务器上运行服务
 
