@@ -24,6 +24,8 @@ curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash
 curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash -s -- --remove
 ```
 
+停用并卸载 Shadowsocks 服务，清除相关的 systemd 配置，但**不会**卸载 docker。
+
 ## 客户端及配置
 
  * macOS: [ShadowsocksX-NG](https://github.com/shadowsocks/ShadowsocksX-NG/releases/latest)
