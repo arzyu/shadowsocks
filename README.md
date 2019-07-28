@@ -16,7 +16,7 @@ curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash
  * 使用 `shadowsocks/shadowsocks-libev` 镜像启动一个 Shadowsocks 服务
  * 配置 systemd，使 Shadowsocks 服务跟随系统自启动
 
-注意：运行时会提示设置端口和密码。
+注意：运行时会提示设置**端口**和**密码**。
 
 ### 卸载：
 
