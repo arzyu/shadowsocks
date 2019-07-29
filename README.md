@@ -16,7 +16,7 @@ curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash
  * 启动 Shadowsocks 服务，使用 docker 运行 [shadowsocks/shadowsocks-libev](https://github.com/shadowsocks/shadowsocks-libev#docker) 镜像
  * 配置 systemd，使 Shadowsocks 服务跟随系统自启动
 
-注意：运行时会提示设置**端口**和**密码**。
+注意：运行时会提示设置**端口**和**密码**；安装完成后，如需修改端口或密码，请再次运行此安装命令。
 
 ### 卸载：
 
