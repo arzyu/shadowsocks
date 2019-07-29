@@ -2,6 +2,13 @@
 
 在 Linux 服务器上运行命令一键部署 Shadowsocks 服务。
 
+已测试 Linux 版本：
+
+ * CentOS 7
+ * Debian 10
+ * Fedora 30
+ * Ubuntu 18.04
+
 ## 部署
 
 ### 安装：
