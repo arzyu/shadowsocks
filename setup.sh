@@ -15,7 +15,7 @@ function set_port() {
 function set_password() {
 	local password=
 
-	while [[ -z "$password" ]]; do
+	while [[ -z $password ]]; do
 		printf "> Set password: " > /dev/tty
 		read password < /dev/tty
 	done
@@ -27,7 +27,7 @@ function add_systemd() {
 	local port="$(set_port)"
 	local password="$(set_password)"
 
-	if [ -f "$service_file" ]; then
+	if [ -f $service_file ]; then
 		systemctl stop "$service_name"
 		systemctl disable "$service_name" > /dev/null 2>&1
 	fi
@@ -69,7 +69,7 @@ function check_service() {
 
 	while (( times < max_times )); do
 		sleep 1
-		if [ -n "$(docker ps --filter "name=$service_name" --format "{{.Names}}")" ]; then
+		if [[ -n $(docker ps --filter "name=$service_name" --format "{{.Names}}") ]]; then
 			break
 		fi
 		(( times++ ))
@@ -85,12 +85,12 @@ function check_service() {
 }
 
 function main() {
-	if [[ "$@" == "--remove" ]]; then
+	if [[ $@ == "--remove" ]]; then
 		remove_systemd
 		exit
 	fi
 
-	if [ ! -x "$(command -v docker)" ]; then
+	if [[ ! -x $(command -v docker) ]]; then
 		printf "> Install docker:\n"
 		curl -fsSL get.docker.com | sh
 		printf "\n"
