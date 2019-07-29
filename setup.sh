@@ -1,8 +1,8 @@
 #! /bin/bash
 
 systemd=/etc/systemd/system
-service_name=shadowsocks.service
-service_file="$systemd/$service_name"
+service_name=shadowsocks
+service_file="$systemd/$service_name.service"
 
 function set_port() {
 	local default_port=8388
@@ -40,8 +40,8 @@ function add_systemd() {
 
 		[Service]
 		Restart=Always
-		ExecStart=$(which docker) run --rm --name %n -p "$port:8388" -e "PASSWORD=$password" shadowsocks/shadowsocks-libev
-		ExecStop=$(which docker) stop %n
+		ExecStart=$(which docker) run --rm --name %N -p "$port:8388" -e "PASSWORD=$password" shadowsocks/shadowsocks-libev
+		ExecStop=$(which docker) stop %N
 
 		[Install]
 		WantedBy=multi-user.target
