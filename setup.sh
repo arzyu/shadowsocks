@@ -64,9 +64,10 @@ function remove_systemd() {
 }
 
 function check_service() {
+	local max_times=10
 	local times=0
 
-	while (( times < 5 )); do
+	while (( times < max_times )); do
 		sleep 1
 		if [ -n "$(docker ps --filter "name=$service_name" --format "{{.Names}}")" ]; then
 			break
@@ -74,7 +75,7 @@ function check_service() {
 		(( times++ ))
 	done
 
-	if (( times < 5 )); then
+	if (( times < max_times )); then
 		printf "\n> Shadowsocks is running:\n"
 		docker ps --filter "name=$service_name" --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"
 		printf "\n"
@@ -90,8 +91,9 @@ function main() {
 	fi
 
 	if [ ! -x "$(command -v docker)" ]; then
-		# install docker
+		printf "> Install docker:\n"
 		curl -fsSL get.docker.com | sh
+		printf "\n"
 	fi
 
 	add_systemd
