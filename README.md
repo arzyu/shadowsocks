@@ -30,6 +30,7 @@ curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash -s --
 
  * macOS: [ShadowsocksX-NG](https://github.com/shadowsocks/ShadowsocksX-NG/releases/latest)
  * Windows 10: [shadowsocks-windows](https://github.com/shadowsocks/shadowsocks-windows/releases/latest)
+ * Android: [shadowsocks-android](https://github.com/shadowsocks/shadowsocks-android/releases/latest)
 
 ![客户端配置范例](https://user-images.githubusercontent.com/1270145/62014025-30b41b80-b1ce-11e9-9ba5-47a19007f5c2.png)
 
