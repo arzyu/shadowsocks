@@ -27,7 +27,7 @@ function add_systemd() {
 	local port="$(set_port)"
 	local password="$(set_password)"
 
-	if [ -f $service_file ]; then
+	if [[ -f $service_file ]]; then
 		systemctl stop "$service_name"
 		systemctl disable "$service_name" > /dev/null 2>&1
 	fi
