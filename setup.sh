@@ -1,8 +1,6 @@
 #! /bin/bash
 
-systemd=/etc/systemd/system
 service_name=shadowsocks
-service_file="$systemd/$service_name.service"
 
 function set_port() {
 	local default_port=8388
@@ -21,46 +19,6 @@ function set_password() {
 	done
 
 	printf "$password"
-}
-
-function add_systemd() {
-	local port="$(set_port)"
-	local password="$(set_password)"
-
-	if [[ -f $service_file ]]; then
-		systemctl stop "$service_name"
-		systemctl disable "$service_name" > /dev/null 2>&1
-	fi
-
-	cat > "$service_file" <<-EOT
-		[Unit]
-		Description=shadowsocks
-		Requires=docker.service
-		After=docker.service
-
-		[Service]
-		Restart=Always
-		ExecStart=$(which docker) run --rm --name %N -p "$port:8388" -e "PASSWORD=$password" shadowsocks/shadowsocks-libev
-		ExecStop=$(which docker) stop %N
-
-		[Install]
-		WantedBy=multi-user.target
-	EOT
-
-	systemctl daemon-reload
-	systemctl enable "$service_name" > /dev/null 2>&1
-	systemctl start "$service_name"
-}
-
-function remove_systemd() {
-	systemctl stop "$service_name"
-	systemctl disable "$service_name" > /dev/null 2>&1
-
-	rm "$service_file"
-
-	systemctl daemon-reload
-
-	printf "> Shadowsocks has been removed.\n"
 }
 
 function check_service() {
@@ -85,18 +43,26 @@ function check_service() {
 }
 
 function main() {
-	if [[ $@ == "--remove" ]]; then
-		remove_systemd
-		exit
-	fi
-
 	if [[ ! -x $(command -v docker) ]]; then
 		printf "> Install docker:\n"
 		curl -fsSL get.docker.com | sh
 		printf "\n"
 	fi
 
-	add_systemd
+	if [[ -n $(docker ps --all --quiet --filter "name=$service_name") ]]; then
+		docker rm "$service_name" --force > /dev/null
+	fi
+
+	if [[ $@ == "--remove" ]]; then
+		exit
+	fi
+
+	local port="$(set_port)"
+	local password="$(set_password)"
+
+	docker run --detach --name "$service_name" --restart unless-stopped \
+			-p "$port:8388" -e "PASSWORD=$password" shadowsocks/shadowsocks-libev > /dev/null
+
 	check_service
 }
 
