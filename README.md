@@ -1,15 +1,8 @@
 # Linux 一键安装 Shadowsocks 服务
 
-在 Linux 服务器上运行命令一键安装 Shadowsocks 服务。
+已测试 Linux 版本：CentOS 7 / Debian 10 / Fedora 30 / Ubuntu 18.04
 
-已测试 Linux 版本：
-
- * CentOS 7
- * Debian 10
- * Fedora 30
- * Ubuntu 18.04
-
-## 部署
+## 服务端部署
 
 ### 安装：
 
@@ -19,7 +12,7 @@ curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash
 
 这个脚本帮你：
 
- * 安装 docker：如果没有检测到 docker，就运行[docker 官方安装脚本](https://github.com/docker/docker-install)
+ * 安装 docker：如果没有检测到 docker，就运行 [docker 官方安装脚本](https://github.com/docker/docker-install)
  * 启动 Shadowsocks 服务：使用 docker 运行 [shadowsocks/shadowsocks-libev](https://github.com/shadowsocks/shadowsocks-libev#docker) 镜像
 
 注意：运行时会提示设置**端口**和**密码**；安装完成后，如需修改端口或密码，请再次运行此安装命令。
