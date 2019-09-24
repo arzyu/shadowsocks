@@ -10,6 +10,14 @@ function set_port() {
 	printf "${port:-$default_port}"
 }
 
+function get_port() {
+	local container_id=$1
+	local port=$(docker inspect $container_id \
+			--format '{{(index (index .HostConfig.PortBindings "8388/tcp") 0).HostPort}}')
+
+	printf "$port"
+}
+
 function set_password() {
 	local password=
 
@@ -17,6 +25,15 @@ function set_password() {
 		printf "> Set password: " > /dev/tty
 		read password < /dev/tty
 	done
+
+	printf "$password"
+}
+
+function get_password() {
+	local container_id=$1
+	local password=$(docker inspect $container_id \
+			--format='{{range .Config.Env}}{{println .}}{{end}}' \
+			| grep -E "^PASSWORD=" | sed 's/[^=]*=//')
 
 	printf "$password"
 }
@@ -42,6 +59,11 @@ function check_service() {
 	fi
 }
 
+function docker_run() {
+	docker run --detach --name "$1" --restart unless-stopped \
+			-p "$2:8388" -e "PASSWORD=$3" shadowsocks/shadowsocks-libev > /dev/null
+}
+
 function main() {
 	if [[ ! -x $(command -v docker) ]]; then
 		printf "> Install docker:\n"
@@ -49,21 +71,34 @@ function main() {
 		printf "\n"
 	fi
 
-	if [[ -n $(docker ps --all --quiet --filter "name=$service_name") ]]; then
-		docker rm "$service_name" --force > /dev/null
+	local port=
+	local password=
+	local container_id=$(docker ps --all --quiet --filter "name=$service_name")
+
+	if [[ $@ == "--update" ]]; then
+		if [[ -n $container_id ]]; then
+			port=$(get_port "$container_id")
+			password=$(get_password "$container_id")
+			docker rm "$container_id" --force > /dev/null
+		fi
+		docker image rm shadowsocks/shadowsocks-libev --force > /dev/null 2>&1
+		docker pull shadowsocks/shadowsocks-libev
+		docker_run "$service_name" "${port:-$(set_port)}" "${password:-$(set_password)}"
+		check_service
+
+	elif [[ $@ == "--remove" ]]; then
+		if [[ -n $container_id ]]; then
+			docker rm "$container_id" --force > /dev/null
+		fi
+		docker image rm shadowsocks/shadowsocks-libev --force > /dev/null 2>&1
+
+	else
+		if [[ -n $container_id ]]; then
+			docker rm "$container_id" --force > /dev/null
+		fi
+		docker_run "$service_name" "${port:-$(set_port)}" "${password:-$(set_password)}"
+		check_service
 	fi
-
-	if [[ $@ == "--remove" ]]; then
-		exit
-	fi
-
-	local port="$(set_port)"
-	local password="$(set_password)"
-
-	docker run --detach --name "$service_name" --restart unless-stopped \
-			-p "$port:8388" -e "PASSWORD=$password" shadowsocks/shadowsocks-libev > /dev/null
-
-	check_service
 }
 
 main "$@"

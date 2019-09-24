@@ -17,6 +17,14 @@ curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash
 
 注意：运行时会提示设置**端口**和**密码**；安装完成后，如需修改端口或密码，请再次运行此安装命令。
 
+### 更新：
+
+```shell
+curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash -s -- --update
+```
+
+这个脚本帮你更新 shadowsocks 服务到最新版本。
+
 ### 卸载：
 
 ```shell
