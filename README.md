@@ -17,6 +17,15 @@ curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash
 
 注意：运行时会提示设置**端口**和**密码**；安装完成后，如需修改端口或密码，请再次运行此安装命令。
 
+上述安装脚本会为我们创建一个名为 `shadowsocks` 服务容器，因此可以使用 docker 命令来控制 Shadowsocks 服务的启动/重启/停止：
+
+```shell
+# 启动/重启/停止 shadowsocks 服务容器
+docker start shadowsocks
+docker restart shadowsocks
+docker stop shadowsocks
+```
+
 ### 更新：
 
 ```shell
