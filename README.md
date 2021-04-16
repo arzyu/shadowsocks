@@ -29,7 +29,7 @@ docker stop shadowsocks
 ### 更新：
 
 ```shell
-curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash -s -- --update
+curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash -s -- update
 ```
 
 这个脚本帮你更新 shadowsocks 服务到最新版本。
@@ -37,7 +37,7 @@ curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash -s --
 ### 卸载：
 
 ```shell
-curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash -s -- --remove
+curl -fsSL https://github.com/arzyu/shadowsocks/raw/master/setup.sh | bash -s -- remove
 ```
 
 移除 Shadowsocks 服务，但**不会**卸载 docker。

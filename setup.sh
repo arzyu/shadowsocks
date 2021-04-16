@@ -75,7 +75,7 @@ function main() {
 	local password=
 	local container_id=$(docker ps --all --quiet --filter "name=$service_name")
 
-	if [[ $@ == "--update" ]]; then
+	if [[ $@ == "update" ]]; then
 		if [[ -n $container_id ]]; then
 			port=$(get_port "$container_id")
 			password=$(get_password "$container_id")
@@ -86,7 +86,7 @@ function main() {
 		docker_run "$service_name" "${port:-$(set_port)}" "${password:-$(set_password)}"
 		check_service
 
-	elif [[ $@ == "--remove" ]]; then
+	elif [[ $@ == "remove" ]]; then
 		if [[ -n $container_id ]]; then
 			docker rm "$container_id" --force > /dev/null
 		fi
