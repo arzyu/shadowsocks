@@ -1,6 +1,6 @@
 # Linux 一键安装 Shadowsocks 服务
 
-已测试 Linux 版本：CentOS 7 / Debian 10 / Fedora 30 / Ubuntu 18.04/20.04
+已测试 Linux 版本：CentOS 7, Debian 10, Fedora 30, Ubuntu 18.04/20.04/22.04
 
 ## 服务端部署
 
